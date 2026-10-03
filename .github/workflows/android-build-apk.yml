@@ -1,0 +1,75 @@
+name: Build AutoAlert Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android licenses
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Install Android SDK components
+        run: |
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" "build-tools;36.0.1" --channel=0
+
+      - name: Generate debug keystore
+        run: |
+          keytool -genkey -v \
+            -keystore debug.keystore \
+            -keyalias androiddebugkey \
+            -keypass android \
+            -storepass android \
+            -dname "CN=Debug,O=Debug,C=US" \
+            -validity 10000
+
+      - name: Make gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Verify APK exists
+        run: |
+          if [ ! -f "app/build/outputs/apk/debug/app-debug.apk" ]; then
+            echo "ERROR: APK file not found at expected location"
+            exit 1
+          fi
+          ls -lh app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: autoalert-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
+
+      - name: Build summary
+        if: always()
+        run: |
+          echo "Build Status: ${{ job.status }}"
+          if [ -f "app/build/outputs/apk/debug/app-debug.apk" ]; then
+            echo "APK: app/build/outputs/apk/debug/app-debug.apk"
+            ls -lh app/build/outputs/apk/debug/app-debug.apk
+          fi

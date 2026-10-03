@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoAlert - Android APK Download</title>
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-hover: #1D4ED8;
+      --bg: #0F172A;
+      --card: #1E293B;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --accent: #10B981;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 32px 24px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .icon-badge {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #F59E0B, #EF4444);
+      border-radius: 20px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 8px 16px rgba(245, 158, 11, 0.3);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    p.desc {
+      margin: 0 0 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      box-sizing: border-box;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    }
+    .btn:active {
+      transform: scale(0.98);
+      background: var(--primary-hover);
+    }
+    .meta {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34D399;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+    }
+    .changelog {
+      text-align: left;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .changelog h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #CBD5E1;
+      margin: 0 0 8px;
+    }
+    .changelog ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon-badge">🛺</div>
+    <span class="badge">Latest Build Ready</span>
+    <h1>AutoAlert</h1>
+    <p class="desc">Auto-Rickshaw Driver Dispatch, Escalation & Rollover Safety Alert System</p>
+    
+    <a class="btn" href="/AutoAlert-debug.apk" download="AutoAlert-debug.apk">
+      Download AutoAlert APK (25 MB)
+    </a>
+    <div class="meta">Package: com.aistudio.autoalert.rkpw | Debug Build</div>
+
+    <div class="changelog">
+      <h3>Latest Implementations:</h3>
+      <ul>
+        <li>Subscribed to saved <code>tiltTopic</code> alongside primary & backup topics</li>
+        <li>Background foreground service alert monitoring enabled</li>
+        <li>Instant rollover "Safety Alert" classification & room logging</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "Remix AutoAlert",
+  "description": "Real-time IoT service call notifications and battery monitoring for Kerala auto-rickshaw drivers with a premium glassmorphism interface.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

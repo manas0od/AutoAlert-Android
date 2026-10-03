@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Auto-rickshaw silhouette in monochrome white for Android notification small icon -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M19,8h-1V5.5C18,4.67 17.33,4 16.5,4h-9C6.67,4 6,4.67 6,5.5V8H5c-1.1,0 -2,0.9 -2,2v5c0,0.55 0.45,1 1,1h1.08c0.44,1.72 2,3 3.92,3s3.48,-1.28 3.92,-3h2.16c0.44,1.72 2,3 3.92,3s3.48,-1.28 3.92,-3H20c0.55,0 1,-0.45 1,-1v-5c0,-1.1 -0.9,-2 -2,-2zM9,17.5c-0.83,0 -1.5,-0.67 -1.5,-1.5s0.67,-1.5 1.5,-1.5 1.5,0.67 1.5,1.5 -0.67,1.5 -1.5,1.5zM17,17.5c-0.83,0 -1.5,-0.67 -1.5,-1.5s0.67,-1.5 1.5,-1.5 1.5,0.67 1.5,1.5 -0.67,1.5 -1.5,1.5zM16,10H8V6h8v4z"/>
+</vector>
