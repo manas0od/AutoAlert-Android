@@ -1,11 +1,11 @@
 name: Build AutoAlert Android APK
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
-      - develop
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -18,58 +18,53 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: gradle
+          java-version: "17"
+          distribution: "temurin"
 
-      - name: Set up Android SDK
+      - name: Setup Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          accept-android-sdk-licenses: false
+          packages: ""
 
-      - name: Accept Android licenses
-        run: |
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+      - name: Accept Android SDK licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
-      - name: Install Android SDK components
+      - name: Install required SDK packages
         run: |
-          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" "build-tools;36.0.1" --channel=0
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+            "platforms;android-36" \
+            "build-tools;36.0.1" \
+            "platform-tools"
 
       - name: Generate debug keystore
         run: |
           keytool -genkey -v \
             -keystore debug.keystore \
-            -keyalias androiddebugkey \
-            -keypass android \
             -storepass android \
-            -dname "CN=Debug,O=Debug,C=US" \
-            -validity 10000
+            -alias androiddebugkey \
+            -keypass android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug,O=Android,C=US"
 
-      - name: Make gradle wrapper executable
+      - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Build debug APK
+      - name: Build with Gradle
         run: ./gradlew assembleDebug --no-daemon
 
       - name: Verify APK exists
         run: |
-          if [ ! -f "app/build/outputs/apk/debug/app-debug.apk" ]; then
-            echo "ERROR: APK file not found at expected location"
+          if [ ! -f app/build/outputs/apk/debug/app-debug.apk ]; then
+            echo "APK file not found!"
             exit 1
           fi
-          ls -lh app/build/outputs/apk/debug/app-debug.apk
 
-      - name: Upload APK as artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
-        if: success()
         with:
           name: autoalert-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 30
 
-      - name: Build summary
-        if: always()
-        run: |
-          echo "Build Status: ${{ job.status }}"
-          if [ -f "app/build/outputs/apk/debug/app-debug.apk" ]; then
-            echo "APK: app/build/outputs/apk/debug/app-debug.apk"
-            ls -lh app/build/outputs/apk/debug/app-debug.apk
-          fi
