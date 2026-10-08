@@ -1,3 +1,8 @@
+Hello, my tinkers.... 👋
+I knew you'd find your way here. Welcome to my little corner of experiments, failures, fixes, and ideas that somehow turn into projects.
+I'm a student who loves taking random ideas and asking, “What if I actually built it?” This repository is a collection of that journey — from messy first attempts to working prototypes, unexpected problems, and the solutions I discover along the way.
+So, if you're here, welcome. You didn't just find a repository; you found the workshop. 🛠️
+
 <div align="center">
 <img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
 </div>
